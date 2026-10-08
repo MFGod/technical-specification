@@ -1,0 +1,146 @@
+main.main-content,
+.accounts-panel,
+.account-field {
+  display: flex;
+  flex-direction: column;
+}
+main.main-content {
+  gap: 28px;
+  padding-block: 48px;
+}
+.page-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.accounts-panel {
+  gap: 16px;
+}
+.labels-hint {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgb(var(--mui-palette-dividerChannel) / 0.35);
+  color: var(--mui-palette-text-secondary);
+  border-radius: 6px;
+  padding: 12px 14px;
+}
+.column-headings,
+.account-row,
+.account-fields,
+.credentials-fields {
+  display: flex;
+  gap: 16px;
+}
+.column-headings {
+  color: var(--mui-palette-text-secondary);
+  font-size: 14px;
+}
+.account-row,
+.account-fields {
+  align-items: center;
+}
+.account-fields,
+.account-field,
+.credential-heading {
+  flex: 2;
+  min-width: 0;
+}
+.account-field {
+  gap: 6px;
+}
+.labels-field {
+  flex: 6;
+}
+.type-field {
+  flex: 4;
+}
+.credentials-fields {
+  flex: 12;
+  min-width: 0;
+}
+.actions-space {
+  flex: 0 0 44px;
+}
+.account-field .field-label {
+  display: none;
+}
+.required-mark {
+  color: var(--mui-palette-error-main);
+}
+.labels-hint svg {
+  flex-shrink: 0;
+  font-size: 20px;
+}
+.type-menu {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.delete-account {
+  color: var(--mui-palette-text-secondary);
+}
+.delete-account:hover {
+  color: var(--mui-palette-error-main);
+  background: rgb(var(--mui-palette-error-mainChannel) / 0.08);
+}
+.empty-state {
+  padding-block: 24px;
+  text-align: center;
+}
+:focus-visible {
+  outline: 2px solid var(--mui-palette-primary-main);
+  outline-offset: 4px;
+}
+@media (max-width: 700px) {
+  .column-headings {
+    display: none;
+  }
+  .account-fields {
+    flex-basis: 100%;
+    flex-wrap: wrap;
+  }
+  .labels-field,
+  .type-field {
+    flex: 2 2 calc(50% - 8px);
+  }
+  .credentials-fields {
+    flex-basis: 100%;
+  }
+  .account-field .field-label {
+    display: block;
+  }
+  .account-row {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+  .accounts-panel {
+    gap: 24px;
+  }
+}
+@media (max-width: 600px) {
+  main.main-content {
+    padding-top: 24px;
+  }
+  .page-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .page-heading h1 {
+    font-size: 28px;
+  }
+  .labels-hint {
+    align-items: flex-start;
+  }
+  .account-fields,
+  .credentials-fields {
+    flex-direction: column;
+  }
+  .account-field,
+  .credentials-fields {
+    flex: auto;
+    width: 100%;
+  }
+}
