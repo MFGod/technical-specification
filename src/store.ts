@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { toForm, validateAccount, type Account } from "./accounts";
+import { isAccountValid, type Account } from "./accounts";
 
 const STORAGE_KEY = "technical-specification.accounts";
 
@@ -16,11 +16,7 @@ const save = (accounts: Account[]) => {
   try {
     localStorage.setItem(
       STORAGE_KEY,
-      JSON.stringify(
-        accounts.filter(
-          (account) => !Object.keys(validateAccount(toForm(account))).length,
-        ),
-      ),
+      JSON.stringify(accounts.filter(isAccountValid)),
     );
     return { accounts, storageError: false };
   } catch {
@@ -36,10 +32,12 @@ interface AccountsStore {
   removeAccount: (id: string) => void;
 }
 
-export const useAccountsStore = create<AccountsStore>((set) => ({
+export const useAccountsStore = create<AccountsStore>((set, get) => ({
   accounts: load(),
   storageError: false,
   addAccount: () => {
+    const lastAccount = get().accounts.at(-1);
+    if (lastAccount && !isAccountValid(lastAccount)) return "";
     const id = crypto.randomUUID();
     set((state) => ({
       accounts: [

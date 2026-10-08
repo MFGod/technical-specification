@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Alert, Box, Button, Container, Typography } from "@mui/material";
+import { Alert, Box, Button, Container, Tooltip, Typography } from "@mui/material";
 import AddRounded from "@mui/icons-material/AddRounded";
 import HelpOutlineRounded from "@mui/icons-material/HelpOutlineRounded";
 import { AccountRow } from "./components/AccountRow";
+import { isAccountValid } from "./accounts";
 import { useAccountsStore } from "./store";
 
 export const App = () => {
@@ -10,6 +11,8 @@ export const App = () => {
   const addAccount = useAccountsStore((state) => state.addAccount);
   const storageError = useAccountsStore((state) => state.storageError);
   const [focusId, setFocusId] = useState("");
+  const lastAccount = accounts.at(-1);
+  const canAdd = !lastAccount || isAccountValid(lastAccount);
 
   return (
     <Container component="main" maxWidth="lg" className="main-content">
@@ -17,13 +20,18 @@ export const App = () => {
         <Typography component="h1" variant="h1">
           Учётные записи
         </Typography>
-        <Button
-          variant="contained"
-          startIcon={<AddRounded />}
-          onClick={() => setFocusId(addAccount())}
-        >
-          Добавить запись
-        </Button>
+        <Tooltip title={canAdd ? "" : "Заполните предыдущую запись"}>
+          <span>
+            <Button
+              variant="contained"
+              startIcon={<AddRounded />}
+              disabled={!canAdd}
+              onClick={() => setFocusId(addAccount())}
+            >
+              Добавить запись
+            </Button>
+          </span>
+        </Tooltip>
       </Box>
       <Box className="accounts-panel">
         <Box className="labels-hint" id="labels-hint">

@@ -55,3 +55,6 @@ export const validateAccount = (form: AccountForm) => {
     errors.password = "Введите пароль";
   return errors;
 };
+
+export const isAccountValid = (account: Account) =>
+  !Object.keys(validateAccount(toForm(account))).length;
